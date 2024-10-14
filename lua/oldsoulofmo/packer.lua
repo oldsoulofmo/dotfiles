@@ -17,6 +17,21 @@ return require('packer').startup(function(use)
     run = ':TSUpdate'
   }
 
+      use 'nvim-treesitter/playground'
+
+    require('nvim-treesitter.configs').setup({
+  highlight = {
+    enable = true, -- Enable Tree-sitter syntax highlighting
+  },
+  playground = {
+    enable = true,
+    updatetime = 25, -- Debounced time for highlighting nodes under cursor (default: 25ms)
+    persist_queries = false, -- Whether queries should persist across sessions
+  },
+        vim.api.nvim_set_hl(0, "@type.builtin", { link = "Type" })
+
+})
+
 
   use {
       'VonHeikemen/lsp-zero.nvim',
@@ -53,9 +68,7 @@ require("transparent").setup({
   exclude = {}, -- Exclude specific groups if necessary
 })
 
-    require('nvim-treesitter.install').command_extra_args = {
-  curl = { "--insecure" }
-}
+
 -- Treesitter configuration
 require('nvim-treesitter.configs').setup({
   ensure_installed = { "c", "cpp","c_sharp", "python", "lua", "javascript", "html", "css" }, -- Languages you want
@@ -66,6 +79,7 @@ require('nvim-treesitter.configs').setup({
   indent = {
     enable = true -- Enable Treesitter-based indentation
   },
+     
 })
 
 
